@@ -173,8 +173,8 @@ const verifyEmail = asyncHandler(async (req, res) => {
 
   let hashedToken = crypto.createHash('sha256').update(token).digest('hex');
   const user = await User.findOne({
-    emailVerificationToken: hashedToken,
-    emailVerificationTokenExpiry: { $gt: Date.now() },
+    emailVerificationToken: hashedToken, // ^--- This comma is treated as "AND"
+    emailVerificationTokenExpiry: { $gt: Date.now() }, // the AND operator is implicit (automatic).
   });
 
   if (!user) {

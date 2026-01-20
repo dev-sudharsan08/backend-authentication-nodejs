@@ -77,12 +77,12 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
-      id: this._id,
+      id: this._id,                           //payload
       email: this.email,
       userName: this.userName,
     },
-    process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: process.env.ACCESS_TOKEN_EXPIRY || '15m' },
+    process.env.ACCESS_TOKEN_SECRET,            // The Secret Key - This is the "digital signature."
+    { expiresIn: process.env.ACCESS_TOKEN_EXPIRY || '15m' },  // The Options
   );
 };
 

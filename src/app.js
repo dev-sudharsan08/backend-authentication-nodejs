@@ -8,9 +8,27 @@ const app = express();
 
 // basic middleware configuration
 app.use(express.json({ limit: '16kb' }));
-app.use(express.urlencoded({ extended: true, limit: '16kb' }));
-app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true, limit: '16kb' })); //To read Forms: Without it, you cannot process <form> submissions.
+/* <form action="/update-profile" method="POST">
+  <input type="text" name="username" value="johndoe">
 
+  <input type="text" name="address[city]" value="New York">
+  <input type="text" name="address[zip]" value="10001">
+
+  <button type="submit">Update</button>
+</form>
+
+console.log(req.body);
+Output:
+{
+  username: "johndoe",
+  address: {
+    city: "New York",
+    zip: "10001"
+  }
+}
+*/
+app.use(express.static('public'));
 app.use(cookieParser());
 
 // cors configuration

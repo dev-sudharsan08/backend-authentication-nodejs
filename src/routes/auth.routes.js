@@ -29,6 +29,8 @@ const router = Router();
 router
   .route('/register')
   .post(userRegistrationValidator(), validate, registerUser);
+  //the .route() is usually for chaining/grouping the methods like get or post or ...  if the URL path is same for all the methods else we can use router.post directly
+  //here the userRegistrationValidator just returns the result of the validation, the validate is the actual middleare which process the result
 router.route('/login').post(userLoginValidator(), validate, loginUser);
 router.route('/verify-email').get(verifyEmail);
 router.route('/refresh-token').post(refreshAccessToken);
